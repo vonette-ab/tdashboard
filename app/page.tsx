@@ -1,10 +1,11 @@
 
-
-
-
-
 import Header from "@/components/Header";
 
+
 export default function Page() {
-  return <Header />;
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 }

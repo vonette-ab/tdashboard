@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Search, Bell, Calendar } from "lucide-react";
@@ -100,7 +101,7 @@ export default function Header({ onClick }: HeaderProps) {
             border: "1px solid #e5e5e5",
             borderRadius: 10,
             padding: "10px 12px",
-            width: "90%",
+            width: "auto",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -124,7 +125,7 @@ export default function Header({ onClick }: HeaderProps) {
             border: "1px solid #e5e5e5",
             borderRadius: 10,
             padding: "10px 12px",
-            width: "90%",
+            width: "auto",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",

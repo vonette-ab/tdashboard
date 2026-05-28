@@ -1,20 +1,16 @@
+
 import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Finset",
-  description: "Detailed Analysis of financial situation.",
+  title: "FinSet – Analytics Dashboard",
+  description: "Detailed overview of your financial situation",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body style={{ margin: 0, padding: 0, background: "#ffffff" }}>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
