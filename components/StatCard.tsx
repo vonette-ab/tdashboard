@@ -6,7 +6,6 @@ interface StatCardProps {
   amount: string;
   cents: string;
   change: number;
-  positive: boolean;
   transactions: number;
   categories: number;
   note: string;
@@ -15,7 +14,7 @@ interface StatCardProps {
 const currencies = ["USD", "EUR", "GBP", "GHS"];
 
 export default function StatCard({
-  label, amount, cents, change, positive, transactions, categories, note,
+  label, amount, cents, change,  transactions, categories, note,
 }: StatCardProps) {
   const [currency, setCurrency] = useState("USD");
   const [currIdx, setCurrIdx] = useState(0);
@@ -42,14 +41,7 @@ export default function StatCard({
         {amount}<span className="stat-cents">{cents}</span>
       </div>
 
-      <div className="stat-change-row">
-        <span className={`stat-badge ${positive ? "positive" : "negative"}`}>
-          {positive ? "↑" : "↑"} {change}%
-        </span>
-        <span className="meta-item" style={{ fontSize: "0.78rem" }}>
-          <span style={{ color: "var(--text-muted)" }}>{transactions} transactions</span>
-        </span>
-      </div>
+      
 
       <div className="stat-meta">
         <div className="meta-item">

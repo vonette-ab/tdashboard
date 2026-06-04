@@ -97,7 +97,7 @@ body {
 
 .charts-row {
   display: grid;
-  grid-template-columns: 1.65fr 1fr;
+  grid-template-columns: 1.8fr 1.4fr 1fr;
   gap: 18px;
 }
 
@@ -578,11 +578,23 @@ body {
   position: relative;
 }
 
-@media (max-width: 1100px) {
-  .stat-cards-row { grid-template-columns: 1fr 1fr; }
-  .charts-row { grid-template-columns: 1fr; }
+@media (max-width: 1200px) {
+  .charts-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .balance-chart-card {
+    grid-column: 1 / -1;
+  }
 }
 
+@media (max-width: 768px) {
+  .charts-row {
+    grid-template-columns: 1fr;
+  }
+  .balance-chart-card {
+    grid-column: auto;
+  }
+}
 
 .auth-root {
   display: flex;
