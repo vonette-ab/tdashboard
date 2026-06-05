@@ -12,18 +12,21 @@ export default function Page() {
 
 
   return (
-    <div className="app-shell">
+       <div className="app-shell">
+      < Sidebar  />
+     
       
-      < Sidebar  /> 
     
       <div className="main">
        
         <Header />
 
+        
+
         <div className="body">
 
         
-          <div className="row stat-row">
+          <div className="stat-cards-row">
             <StatCard
               label="Total balance"
               amount="$15,700.00"

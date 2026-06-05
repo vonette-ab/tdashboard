@@ -96,7 +96,8 @@ interface SidebarProps {
   setActiveNav: (nav: string) => void;
 }
 
-export default function Sidebar({ activeNav, setActiveNav }: SidebarProps) {
+export default function Sidebar() {
+  const [activeNav, setActiveNav] = useState("Analytics");
   const [darkMode, setDarkMode] = useState(false);
 
   return (

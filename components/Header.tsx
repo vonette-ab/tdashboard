@@ -36,7 +36,7 @@ export default function Header({ onClick }: HeaderProps) {
             justifyContent: "center",
           }}
         >
-          <Calendar size={18} style={{ color: "#000" }} />
+          <Calendar size={22} style={{ color: "#000" }} />
         </div>
 
         <div>
@@ -68,7 +68,7 @@ export default function Header({ onClick }: HeaderProps) {
             justifyContent: "center",
           }}
         >
-          <Search size={18} style={{ color: "#000" }} />
+          <Search size={22} style={{ color: "#000" }} />
         </div>
 
         <div
@@ -81,7 +81,7 @@ export default function Header({ onClick }: HeaderProps) {
             justifyContent: "center",
           }}
         >
-          <Bell size={18} style={{ color: "#000" }} />
+          <Bell size={22} style={{ color: "#000" }} />
         </div>
 
         <div

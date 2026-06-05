@@ -92,13 +92,13 @@ body {
 .stat-cards-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  gap: 12px;
 }
 
 .charts-row {
   display: grid;
   grid-template-columns: 1.8fr 1.4fr 1fr;
-  gap: 18px;
+  gap: 12px;
 }
 
 .chart-card {
