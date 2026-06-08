@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { saveToken } from "@/lib/auth";
+import SuccessPopup from "@/components/SuccessPopup";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -12,6 +14,8 @@ export default function RegisterPage() {
   const [error, setError] = useState("");
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [agreed, setAgreed] = useState(false);
+
+  
 
   const update = (field: string, value: string) => setForm(f => ({ ...f, [field]: value }));
 
@@ -30,33 +34,18 @@ export default function RegisterPage() {
   const strengthColor = ["", "#ef4444", "#f59e0b", "#22c55e", "#7c5cfc"][strength];
 
   const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    if (!form.name || !form.email || !form.password || !form.confirm) {
-      setError("Please fill in all fields.");
-      return;
-    }
-    if (form.password !== form.confirm) {
-      setError("Passwords do not match.");
-      return;
-    }
-    if (strength < 2) {
-      setError("Please choose a stronger password.");
-      return;
-    }
-    if (!agreed) {
-      setError("Please agree to the terms to continue.");
-      return;
-    }
-    setLoading(true);
-    await new Promise(r => setTimeout(r, 1200));
-    setLoading(false);
-    router.push("/");
-  };
+  e.preventDefault();
 
+  // ✅ MOCK — no API needed, remove this when your API is ready
+  saveToken("mock-token-123");
+  setShowPopup(true);
+  setTimeout(() => {
+    router.push("/dashboard");
+  }, 2000);
+};
   return (
     <div className="auth-root">
-      {/* Left panel */}
+      {/* Left  */}
       <div className="auth-left">
         <div className="auth-left-inner">
           <div className="auth-brand">
@@ -92,7 +81,7 @@ export default function RegisterPage() {
         </div>
       </div>
 
-      {/* Right panel */}
+      {/* Right */}
       <div className="auth-right">
         <div className="auth-form-wrapper">
           <div className="auth-form-header">
@@ -243,4 +232,13 @@ export default function RegisterPage() {
       </div>
     </div>
   );
+
+
 }
+
+{showPopup && (
+  <SuccessPopup
+    message="Login Successful!"
+    subtext="Redirecting you to the dashboard..."
+  />
+)}
