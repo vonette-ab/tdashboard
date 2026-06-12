@@ -16,14 +16,15 @@ export default function Header({ onClick }: HeaderProps) {
     <div
       style={{
         borderBottom: "1px solid rgba(255,255,255,0.06)",
-        padding: "18px 32px",
+        padding: "8px 22px 12px",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
+        marginTop: 0,
       }}
     >
       {/* LEFT SIDE */}
-      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
 
        
         <div
@@ -40,17 +41,9 @@ export default function Header({ onClick }: HeaderProps) {
         </div>
 
         <div>
-          <div style={{ fontWeight: 700, fontSize: 30, letterSpacing: -0.3 }}>
+          <div style={{ fontWeight: 300, fontSize: 10, letterSpacing: -0.3 }}>
             Analytics
-          </div>
-          <div
-            style={{
-              fontSize: 11,
-              color: "rgba(255,255,255,0.35)",
-              letterSpacing: 1,
-            }}
-          >
-            Detailed overview of your financial situation
+           <h3>Detailed Overview of your finanacial situation</h3> 
           </div>
         </div>
       </div>
@@ -68,7 +61,7 @@ export default function Header({ onClick }: HeaderProps) {
             justifyContent: "center",
           }}
         >
-          <Search size={22} style={{ color: "#000" }} />
+          <Search size={15} style={{ color: "#000" }} />
         </div>
 
         <div
@@ -81,25 +74,20 @@ export default function Header({ onClick }: HeaderProps) {
             justifyContent: "center",
           }}
         >
-          <Bell size={22} style={{ color: "#000" }} />
-        </div>
+         <div>
+          <Bell size={15} style={{ color: "#000" }} />
+        
+          </div>
+          <div style={{ fontWeight: 300, fontSize: 10, letterSpacing: -0.3 }}></div>
+          </div>
 
-        <div
-          style={{
-            fontSize: 12,
-            color: "rgba(255,255,255,0.3)",
-            fontFamily: "'DM Mono', monospace",
-          }}
-        >
-          Adaline Lively
-        </div>
 
         <button
           onClick={onClick}
           style={{
             background: "#fff",
             border: "1px solid #e5e5e5",
-            borderRadius: 10,
+            borderRadius: 6,
             padding: "10px 12px",
             width: "auto",
             display: "flex",
@@ -107,13 +95,13 @@ export default function Header({ onClick }: HeaderProps) {
             justifyContent: "center",
             gap: 8,
             cursor: "pointer",
-            fontSize: 14,
-            fontWeight: 600,
+            fontSize: 10,
+            fontWeight: 300,
             color: "#000",
             boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
           }}
         >
-          <span style={{ fontSize: 18, lineHeight: 1 }}></span>
+          <span style={{ fontSize: 10, lineHeight: 1 }}></span>
           Manage widgets
         </button>
 
@@ -131,13 +119,13 @@ export default function Header({ onClick }: HeaderProps) {
             justifyContent: "center",
             gap: 8,
             cursor: "pointer",
-            fontSize: 14,
-            fontWeight: 600,
+            fontSize: 10,
+            fontWeight: 300,
             color: "#000",
             boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
           }}
         >
-          <span style={{ fontSize: 18, lineHeight: 1 }}>+</span>
+          <span style={{ fontSize: 10, lineHeight: 1 }}>+</span>
           Add a widget
         </button>
 

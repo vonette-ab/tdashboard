@@ -1,8 +1,16 @@
 
 "use client";
-import { useState } from "react";
 
-const navItems = [
+import { useState, type ReactNode } from "react";
+import Link from "next/link";
+
+type NavItem = {
+  label: string;
+  href?: string;
+  icon: ReactNode;
+};
+
+const navItems: NavItem[] = [
   {
     label: "Dashboard",
     icon: (
@@ -24,14 +32,16 @@ const navItems = [
   },
   {
     label: "Wallet",
-    icon: (
+    href: "/data-table",
+    icon : (
       <svg className="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.7">
-        <rect x="2" y="5" width="16" height="12" rx="2.5" />
-        <path d="M14 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0z" fill="currentColor" stroke="none" />
-        <path d="M2 8h16" strokeLinecap="round" />
+        <rect x="2" y="3" width="16" height="14" rx="2" />
+        <path d="M2 7h16M2 11h16M2 15h16" strokeLinecap="round" />
+        <path d="M7 7v10" strokeLinecap="round" />
       </svg>
     ),
   },
+   
   {
     label: "Goals",
     icon: (
@@ -69,7 +79,7 @@ const navItems = [
   },
 ];
 
-const bottomItems = [
+const bottomItems: NavItem[] = [
   {
     label: "Help",
     icon: (
@@ -91,18 +101,15 @@ const bottomItems = [
   },
 ];
 
-interface SidebarProps {
-  activeNav: string;
-  setActiveNav: (nav: string) => void;
-}
-
 export default function Sidebar() {
-  const [activeNav, setActiveNav] = useState("Analytics");
+  const [activeNav, setActiveNav] = useState("Dashboard");
   const [darkMode, setDarkMode] = useState(false);
 
   return (
     <aside className="sidebar">
-      <button className="sidebar-collapse-btn" title="Collapse sidebar">‹</button>
+      <button className="sidebar-collapse-btn" title="Collapse sidebar">
+        ‹
+      </button>
 
       <div className="sidebar-logo">
         <div className="logo-icon">F</div>
@@ -110,16 +117,38 @@ export default function Sidebar() {
       </div>
 
       <nav className="sidebar-nav">
-        {navItems.map((item) => (
-          <button
-            key={item.label}
-            className={`nav-item${activeNav === item.label ? " active" : ""}`}
-            onClick={() => setActiveNav(item.label)}
-          >
-            {item.icon}
-            {item.label}
-          </button>
-        ))}
+        {navItems.map((item) => {
+          const isActive = activeNav === item.label;
+          const content = (
+            <>
+              {item.icon}
+              <span>{item.label}</span>
+            </>
+          );
+
+          if (item.href) {
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`nav-item${isActive ? " active" : ""}`}
+                onClick={() => setActiveNav(item.label)}
+              >
+                {content}
+              </Link>
+            );
+          }
+
+          return (
+            <button
+              key={item.label}
+              className={`nav-item${isActive ? " active" : ""}`}
+              onClick={() => setActiveNav(item.label)}
+            >
+              {content}
+            </button>
+          );
+        })}
       </nav>
 
       <div className="sidebar-bottom">
