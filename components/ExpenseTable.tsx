@@ -2,58 +2,50 @@
 "use client";
 import { useState } from "react";
 
-type IncomeRow = {
+type ExpenseRow = {
   id: number;
   amount: number;
-  description: string;
   category: string;
-  type: string;
 };
 
-const initialData: IncomeRow[] = [
-  { id: 1, amount: 1200, description: "Freelance web project", category: "Salary", type: "Income" },
-  { id: 2, amount: 850, description: "Consulting fee", category: "Salary", type: "Income" },
-  { id: 3, amount: 3200, description: "Monthly salary", category: "Salary", type: "Income" },
+const initialExpenseData: ExpenseRow[] = [
+  { id: 1, amount: 200, category: "Food" },
+  { id: 2, amount: 50, category: "Transport" },
+  { id: 3, amount: 900, category: "Rent" },
 ];
 
-export default function DataTable() {
-  const [rows, setRows] = useState<IncomeRow[]>(initialData);
+export default function ExpenseTable() {
+  const [rows, setRows] = useState<ExpenseRow[]>(initialExpenseData);
   const [showModal, setShowModal] = useState(false);
-  const [editingRow, setEditingRow] = useState<IncomeRow | null>(null);
+  const [editingRow, setEditingRow] = useState<ExpenseRow | null>(null);
   const [amount, setAmount] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("Salary");
-  const [type, setType] = useState("Income");
+  const [category, setCategory] = useState("Food");
   let nextId = rows.length ? Math.max(...rows.map(r => r.id)) + 1 : 1;
 
   const openAdd = () => {
     setEditingRow(null);
     setAmount("");
-    setDescription("");
-    setCategory("Salary");
-    setType("Income");
+    setCategory("Food");
     setShowModal(true);
   };
 
-  const openEdit = (row: IncomeRow) => {
+  const openEdit = (row: ExpenseRow) => {
     setEditingRow(row);
     setAmount(String(row.amount));
-    setDescription(row.description);
     setCategory(row.category);
-    setType(row.type);
     setShowModal(true);
   };
 
   const handleSave = () => {
-    if (!amount || !description) return;
+    if (!amount) return;
     if (editingRow) {
       setRows(rows.map(r =>
         r.id === editingRow.id
-          ? { ...r, amount: parseFloat(amount), description, category, type }
+          ? { ...r, amount: parseFloat(amount), category }
           : r
       ));
     } else {
-      setRows([...rows, { id: nextId, amount: parseFloat(amount), description, category, type }]);
+      setRows([...rows, { id: nextId, amount: parseFloat(amount), category }]);
     }
     setShowModal(false);
   };
@@ -76,43 +68,30 @@ export default function DataTable() {
             padding: "24px", width: "340px", boxShadow: "0 20px 60px rgba(0,0,0,0.2)",
           }}>
             <h3 style={{ margin: "0 0 16px", fontSize: "16px" }}>
-              {editingRow ? "Edit Income" : "Add Income"}
+              {editingRow ? "Edit Expense" : "Add Expense"}
             </h3>
 
-            <label style={{ fontSize: "13px", color: "#666" }}>Amount</label>
+            <label style={{ fontSize: "13px", color: "#666" }}>Expense Amount</label>
             <input
               type="number"
               value={amount}
               onChange={e => setAmount(e.target.value)}
-              placeholder="e.g. 500"
+              placeholder="e.g. 100"
               style={{ width: "100%", marginBottom: "12px", padding: "8px", boxSizing: "border-box" }}
             />
 
-            <label style={{ fontSize: "13px", color: "#666" }}>Description</label>
-            <input
-              type="text"
-              value={description}
-              onChange={e => setDescription(e.target.value)}
-              placeholder="e.g. Freelance project"
-              style={{ width: "100%", marginBottom: "12px", padding: "8px", boxSizing: "border-box" }}
-            />
-
-            <label style={{ fontSize: "13px", color: "#666" }}>Category</label>
+            <label style={{ fontSize: "13px", color: "#666" }}>Expense Category</label>
             <select
               value={category}
               onChange={e => setCategory(e.target.value)}
-              style={{ width: "100%", marginBottom: "12px", padding: "8px", boxSizing: "border-box" }}
-            >
-              <option value="Salary">Salary</option>
-            </select>
-
-            <label style={{ fontSize: "13px", color: "#666" }}>Type</label>
-            <select
-              value={type}
-              onChange={e => setType(e.target.value)}
               style={{ width: "100%", padding: "8px", boxSizing: "border-box" }}
             >
-              <option value="Income">Income</option>
+              <option value="Food">Food</option>
+              <option value="Transport">Transport</option>
+              <option value="Rent">Rent</option>
+              <option value="Freelance">Freelance</option>
+              <option value="Utilities">Utilities</option>
+              <option value="Entertainment">Entertainment</option>
             </select>
 
             <div style={{ display: "flex", gap: "8px", justifyContent: "flex-end", marginTop: "20px" }}>
@@ -127,12 +106,12 @@ export default function DataTable() {
 
       {/* TOP BAR */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
-        <h2 style={{ margin: 0, fontSize: "18px" }}>Income Records</h2>
+        <h2 style={{ margin: 0, fontSize: "18px" }}>Expense Records</h2>
         <button
           onClick={openAdd}
           style={{ background: "#111", color: "white", border: "none", padding: "9px 16px", borderRadius: "8px", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px" }}
         >
-          + Add Income
+          + Add Expense
         </button>
       </div>
 
@@ -141,10 +120,8 @@ export default function DataTable() {
         <thead>
           <tr style={{ borderBottom: "1px solid #e5e7eb" }}>
             <th style={th}>ID</th>
-            <th style={th}>Income Amount</th>
-            <th style={th}>Description</th>
-            <th style={th}>Category</th>
-            <th style={th}>Type</th>
+            <th style={th}>Expense Amount</th>
+            <th style={th}>Expense Category</th>
             <th style={th}>Action</th>
           </tr>
         </thead>
@@ -152,12 +129,10 @@ export default function DataTable() {
           {rows.map(row => (
             <tr key={row.id} style={{ borderBottom: "0.5px solid #f3f4f6" }}>
               <td style={td}>{row.id}</td>
-              <td style={{ ...td, color: "green", fontWeight: 500 }}>
+              <td style={{ ...td, color: "#dc2626", fontWeight: 500 }}>
                 GHS {row.amount.toLocaleString("en-GH", { minimumFractionDigits: 2 })}
               </td>
-              <td style={td}>{row.description}</td>
               <td style={td}>{row.category}</td>
-              <td style={td}>{row.type}</td>
               <td style={td}>
                 <div style={{ display: "flex", gap: "6px" }}>
                   <button
@@ -181,7 +156,7 @@ export default function DataTable() {
 
       {rows.length === 0 && (
         <p style={{ textAlign: "center", color: "#999", padding: "32px 0" }}>
-          No income records yet. Click "Add Income" to get started.
+          No expense records yet. Click "Add Expense" to get started.
         </p>
       )}
     </div>
